@@ -78,6 +78,10 @@ angular.module('ordersApp', ['ngRoute'])
 				_this.get();
 		};
 
+		_this.openAddModal = function() {
+			$('#addOrderModal').modal('show');
+		};
+
 		_this.add = function() {
 			let data = _this.orderToAdd;
 			if (data.companyName && data.customerAddress && data.orderedItem &&
@@ -90,6 +94,7 @@ angular.module('ordersApp', ['ngRoute'])
 						orderedItem: data.orderedItem
 					});
 					_this.orderToAdd = {};
+					$('#addOrderModal').modal('hide');
 				});
 			}
 			else
