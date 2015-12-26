@@ -2,11 +2,13 @@
 
 A small web app using the MEAN stack and a RESTful API.
 
+http://zidaroiu.com:8081
+
 ### Installation
 
-npm install -g grunt-cli;sudo apt-get install -y mongodb;npm install -g mocha;npm install -g watch;npm install -g nodemon;npm install
+sudo apt-get install -y mongodb;npm install -g grunt-cli;npm install -g mocha;npm install -g watch;npm install -g nodemon;npm install
 
-### Run server
+### Start server
 
 npm start
 
@@ -17,5 +19,3 @@ npm run build
 ### Test
 
 npm test
-
-
