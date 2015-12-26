@@ -1,12 +1,13 @@
 var rest = require('restler');
-var debug = require('debug')('api-test')
+var debug = require('debug')('api-test');
+var server = 'http://zidaroiu.com:8081';
 
 var lastInsertedId = null;
 
 describe('Orders API', function() {
 	this.timeout(5000);
 	it('should get the list of orders', function(done) {
-		rest.get('http://advisorking.com:8081/api/orders').on('success', function(data, response) {
+		rest.get(server + '/api/orders').on('success', function(data, response) {
 			debug('Returned Data: ');
 			debug(data);
 			if (data instanceof Array)
@@ -15,7 +16,7 @@ describe('Orders API', function() {
 	});
 
 	it('should get the list of top orders', function(done) {
-		rest.get('http://advisorking.com:8081/api/top-orders').on('success', function(data, response) {
+		rest.get(server + '/api/top-orders').on('success', function(data, response) {
 			debug('Returned Data: ');
 			debug(data);
 			if (data instanceof Array)
@@ -24,7 +25,7 @@ describe('Orders API', function() {
 	});
 
 	it('should insert an order and return the id', function(done) {
-		rest.post('http://advisorking.com:8081/api',{
+		rest.post(server + '/api',{
 			data: {
 				companyName: 'companyName',
 				customerAddress: 'test customerAddress',
@@ -40,17 +41,8 @@ describe('Orders API', function() {
 		});
 	});
 
-	it('should find the orders of a company', function(done) {
-		rest.get('http://advisorking.com:8081/api/find-company/companyName').on('success', function(data, response) {
-			debug('Returned Data: ');
-			debug(data);
-			if (data instanceof Array)
-				done();
-		});
-	});
-
-	it('should find the orders of an address', function(done) {
-		rest.get('http://advisorking.com:8081/api/find-address/test customerAddress').on('success', function(data, response) {
+	it('should find orders', function(done) {
+		rest.get(server + '/api/search/search-term').on('success', function(data, response) {
 			debug('Returned Data: ');
 			debug(data);
 			if (data instanceof Array)
@@ -62,7 +54,7 @@ describe('Orders API', function() {
 		if (!lastInsertedId)
 			return;
 
-		rest.del('http://advisorking.com:8081/api/' + lastInsertedId).on('success', function(data, response) {
+		rest.del(server + '/api/' + lastInsertedId).on('success', function(data, response) {
 			debug('Returned Data: ');
 			debug(data);
 			if (data && data._id)
