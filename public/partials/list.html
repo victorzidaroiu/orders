@@ -1,0 +1,88 @@
+<div>
+	<div class="ui page grid">
+		<div class="row centered">
+			<h1 class="ui header">Orders</h1>
+		</div>
+		<div class="row">
+			<div class="six wide column left">
+				<div class="ui large input">
+					<input ng-model="orders.searchInput" ng-change="orders.search()" type="text" placeholder="Search orders">
+				</div>
+			</div>
+			<div class="ten wide column right">
+				<span ng-click="orders.openAddModal()">
+					<span class="ui large green button">Add an order</span>
+				</span>
+				<a href='#top-orders'>
+					<span class="ui large green button">Top Orders</span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="ui page grid">
+		<div class="one column">
+			<h4 class='center' ng-if="orders.list.length==0">
+				<div class="ui segment">
+					<p>No orders have been added yet.</p>
+				</div>
+			</h4>
+			<table class="ui four column celled table" ng-if="orders.list.length!=0">
+				<thead>
+				<tr>
+					<th class="center aligned">Company Name</th>
+					<th class="center aligned">Customer Address</th>
+					<th class="center aligned">Ordered Item</th>
+					<th class="center aligned">Options</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr ng-repeat="order in orders.list">
+					<td class="center aligned">{{order.companyName}}</td>
+					<td class="center aligned">{{order.customerAddress}}</td>
+					<td class="center aligned">{{order.orderedItem}}</td>
+					<td class="center aligned">
+						<div ng-click="orders.delete(order.orderId)" class="ui labeled icon small button red">
+							<i class="remove icon"></i>
+							Delete
+						</div>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div id='addOrderModal' class="ui small modal">
+		<div class="ui segment">
+			<div class="ui form">
+				<h3 class="center ui header">Add an order</h3>
+				<form ng-submit="orders.add()">
+					<div class="field">
+						<input ng-model="orders.orderToAdd.companyName" placeholder="Company Name" type="text">
+					</div>
+					<div class="field">
+						<input ng-model="orders.orderToAdd.customerAddress" placeholder="Customer Address" type="text">
+					</div>
+					<div class="field">
+						<input ng-model="orders.orderToAdd.orderedItem" placeholder="Ordered Item" type="text">
+					</div>
+					<br>
+					<div class='center'>
+						<button type="submit" class="ui labeled icon big button green">
+							<i class="plus icon"></i>
+							Add
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id='addOrderAlert' class="ui small modal">
+		<div class="header">Error</div>
+		<div class="content">
+			<p>Please fill in all the fields.</p>
+		</div>
+		<div class="actions center">
+			<span class="ui green approve button">OK</span>
+		</div>
+	</div>
+</div>

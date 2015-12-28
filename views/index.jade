@@ -1,0 +1,8 @@
+doctype html
+html(ng-app="ordersApp")
+    head
+        title(ng-bind="title")
+        link(rel='stylesheet', href='bundle.min.css')
+    body
+        div(ng-view="ng-view")
+        script(type='text/javascript' src='bundle.min.js')

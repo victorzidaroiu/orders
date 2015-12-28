@@ -1,0 +1,33 @@
+<div>
+	<div class="ui page grid">
+		<div class="one column">
+			<h1 class="ui header center">Top Ordered Items</h1>
+			<h4 class='center' ng-if="orders.list.length==0">
+				<div class="ui segment">
+					<p>No orders have been added yet.</p>
+				</div>
+			</h4>
+			<table class="ui four column celled table" ng-if="orders.list.length!=0">
+				<thead>
+				<tr>
+					<th class="center aligned">Ordered Item</th>
+					<th class="center aligned">Times ordered</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr ng-repeat="order in orders.list">
+					<td class="center aligned">{{order.orderedItem}}</td>
+					<td class="center aligned">{{order.timesOrdered}}</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="ui page grid">
+		<div class="one column center">
+			<a href='/#/' class="">
+				<span class="ui green button">Back</span>
+			</a>
+		</div>
+	</div>
+</div>
