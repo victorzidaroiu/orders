@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "start": "nohup node ./bin/www;",
+    "start": "nohup forever ./bin/www;",
     "build": "cd client; watch grunt"
   },
   "repository": {
