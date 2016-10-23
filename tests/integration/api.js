@@ -1,9 +1,10 @@
 var rest = require('restler');
 var debug = require('debug')('api-test');
-var server = 'http://zidaroiu.com:8081';
+require('dotenv').config({ silent: true })
+
+var server = 'http://localhost:' + process.env.PORT;
 
 var lastInsertedId = null;
-
 describe('Orders API', function() {
 	this.timeout(5000);
 	it('should get the list of orders', function(done) {

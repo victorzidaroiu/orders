@@ -4,13 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var routes = require('./routes/all.js');
+var routes = require('./routes.js');
+require('dotenv').config({ silent: true })
 
 var app = express();
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/orders', function(err) {
+mongoose.connect(process.env.MONGODB_URI, function(err) {
   if(err) {
     console.log('mongodb connection error', err);
   } else {
@@ -28,7 +28,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname + '/../', 'public')));
 
 app.use('/', routes);
 

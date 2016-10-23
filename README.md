@@ -1,22 +1,29 @@
 ## Orders App
 
-A small web app using the MEAN stack and a RESTful API.
+A demo app built using the MEAN stack. It implements a RESTful API to communicate to an AngularJS front end.
 
-http://zidaroiu.com:8081
+http://orders.zidaroiu.com
+
+### Requirements
+
+- node
+- MongoDB
+- Mocha
+- Grunt
 
 ### Installation
-sudo apt-get install -y mongodb;
 
-npm install -g grunt-cli;npm install -g mocha;npm install -g watch;npm install -g nodemon;npm install
+``` nvm use ```
+``` npm i ```
 
 ### Start server
 
-npm start
+``` npm start ```
 
 ### Build
 
-npm run build
+``` npm run build ```
 
 ### Test
 
-npm test
+``` npm test ```

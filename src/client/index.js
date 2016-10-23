@@ -23,7 +23,7 @@ angular.module('ordersApp', ['ngRoute'])
 		$scope.orders = _this;
 
 		_this.get = function() {
-			$http.get('/api/top-orders').success(function (data) {
+			$http.get('/api/orders/top').success(function (data) {
 				_this.list = data.map(function (order) {
 					order.orderId = order._id;
 					delete order._id;
@@ -42,7 +42,7 @@ angular.module('ordersApp', ['ngRoute'])
 		$scope.orders = _this;
 
 		_this.get = function() {
-			$http.get('/api/orders').success(function (data) {
+			$http.get('/api/orders/list').success(function (data) {
 				_this.list = data.map(function (order) {
 					order.orderId = order._id;
 					delete order._id;
@@ -54,7 +54,7 @@ angular.module('ordersApp', ['ngRoute'])
 		_this.get();
 
 		_this.delete = function (orderId) {
-			$http.delete('/api/' + orderId).success(function() {
+			$http.delete('/api/orders/delete/' + orderId).success(function() {
 				_this.list = _this.list.filter(function (order) {
 					if (order.orderId === orderId)
 						return false;
@@ -67,7 +67,7 @@ angular.module('ordersApp', ['ngRoute'])
 		_this.search = function() {
 			_this.searchInput = _this.searchInput.trim();
 			if (_this.searchInput.length > 0)
-				$http.get('/api/search/' + _this.searchInput).success(function (data) {
+				$http.get('/api/orders/search/' + _this.searchInput).success(function (data) {
 					_this.list = data.map(function (order) {
 						order.orderId = order._id;
 						delete order._id;
@@ -86,7 +86,7 @@ angular.module('ordersApp', ['ngRoute'])
 			let data = _this.orderToAdd;
 			if (data.companyName && data.customerAddress && data.orderedItem &&
 				data.companyName.length > 0 && data.customerAddress.length > 0 && data.orderedItem.length > 0) {
-				$http.post('/api/', _this.orderToAdd).success(function (data) {
+				$http.post('/api/orders/create', _this.orderToAdd).success(function (data) {
 					_this.list.push({
 						orderId: data._id,
 						companyName: data.companyName,

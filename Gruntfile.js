@@ -1,10 +1,18 @@
 module.exports = function(grunt) {
-
 	var es2015 = require('babel-preset-es2015');
 
-	// Project configuration.
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
+		sass: {
+        options: {
+            sourceMap: true
+        },
+        dist: {
+            files: {
+                'tmp/index.css': 'src/sass/index.sass',
+            }
+        }
+    },
 		cssmin: {
 			options: {
 				shorthandCompacting: false,
@@ -12,7 +20,7 @@ module.exports = function(grunt) {
 			},
 			target: {
 				files: {
-					'client/index.min.css' : 'client/index.css'
+					'tmp/index.min.css': 'tmp/index.css',
 				}
 			}
 		},
@@ -23,9 +31,9 @@ module.exports = function(grunt) {
 			},
 			build: {
 				src: [
-					'client/index_es5.js'
+					'tmp/index_es6.js'
 				],
-				dest: 'client/index_es5.min.js'
+				dest: 'tmp/index_es6.min.js'
 			}
 		},
 		babel: {
@@ -35,42 +43,43 @@ module.exports = function(grunt) {
 			},
 			dist: {
 				files: {
-					"client/index_es5.js": "client/index.js"
+					"tmp/index_es6.js": "src/client/index.js"
 				}
 			}
 		},
 		concat: {
 			js: {
 				src: [
-					'client/angular.min.js',
-					'client/angular-route.min.js',
-					'client/jquery-2.1.4.min.js',
-					'client/semantic.min.js',
-					'client/index_es5.min.js'
+					'src/client/vendor/angular.min.js',
+					'src/client/vendor/angular-route.min.js',
+					'src/client/vendor/angular-cookies.min.js',
+					'src/client/vendor/jquery-2.1.4.min.js',
+					'src/client/vendor/semantic.min.js',
+					'tmp/index_es6.min.js'
 				],
-				dest: 'public/bundle.min.js',
+				dest: 'public/bundle.min.js'
 			},
 			css: {
 				options: {
 					separator: ''
 				},
 				src: [
-					'client/semantic.min.css',
-					'client/index.min.css'
+					'src/client/vendor/semantic.min.css',
+					'tmp/index.min.css',
+					'tmp/catalogue.min.css'
 				],
 				dest: 'public/bundle.min.css'
 			}
 		}
 	});
 
-	// Load the plugin that provides the "uglify" task.
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-babel');
+	grunt.loadNpmTasks('grunt-sass');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 
 	require('load-grunt-tasks')(grunt);
 
-	// Default task(s).
-	grunt.registerTask('default', ['babel', 'uglify', 'cssmin', 'concat']);
+	grunt.registerTask('default', ['sass', 'babel', 'uglify', 'cssmin', 'concat']);
 };
