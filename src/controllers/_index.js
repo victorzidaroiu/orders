@@ -1,12 +1,19 @@
-var controllers = { };
+import home from './home';
+import orderList from './order-list';
+import orderCreate from './order-create';
+import orderDelete from './order-delete';
+import orderGet from './order-get';
+import orderSearch from './order-search';
+import orderUpdate from './order-update';
+import orderTop from './order-top';
 
-controllers.home = require('./home.js');
-controllers.orderList = require('./order-list');
-controllers.orderCreate = require('./order-create');
-controllers.orderDelete = require('./order-delete');
-controllers.orderGet = require('./order-get');
-controllers.orderSearch = require('./order-search');
-controllers.orderUpdate = require('./order-update');
-controllers.orderTop = require('./order-top');
-
-module.exports = controllers;
+export default {
+  home,
+  orderList,
+  orderCreate,
+  orderDelete,
+  orderGet,
+  orderSearch,
+  orderUpdate,
+  orderTop,
+};

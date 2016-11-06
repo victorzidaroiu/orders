@@ -1,7 +1,8 @@
-var express = require('express');
-var router = express.Router();
-var debug = require('debug')('API');
-var controllers = require('./controllers/_index.js');
+import express from 'express';
+import controllers from './controllers/_index';
+/* eslint-disable */
+const router = express.Router();
+/* eslint-enable */
 
 router.get('/', controllers.home);
 router.get('/api/orders/list', controllers.orderList);
@@ -12,4 +13,4 @@ router.get('/api/orders/search/:name', controllers.orderSearch);
 router.put('/api/orders/update/:id', controllers.orderUpdate);
 router.delete('/api/orders/delete/:id', controllers.orderDelete);
 
-module.exports = router;
+export default router;

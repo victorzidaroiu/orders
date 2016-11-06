@@ -1,9 +1,9 @@
-var mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-var schema = new mongoose.Schema({
-	companyName: String,
-	customerAddress: String,
-	orderedItem: String
+const schema = new mongoose.Schema({
+  companyName: String,
+  customerAddress: String,
+  orderedItem: String,
 });
 
-module.exports = mongoose.model('Orders', schema);
+export default mongoose.model('Orders', schema);

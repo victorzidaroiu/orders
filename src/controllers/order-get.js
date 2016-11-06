@@ -1,11 +1,11 @@
-var mongoose = require('mongoose');
-var ordersModel = require('../models/orders.js');
+import ordersModel from '../models/orders';
 
-module.exports = function (req, res, next) {
-	ordersModel.findById(req.params.id, function (err, data) {
-		if (err)
-			res.json(false);
-		else
-			res.json(data);
-	});
+export default (req, res) => {
+  ordersModel.findById(req.params.id, (err, data) => {
+    if (err) {
+      res.json(false);
+    } else {
+      res.json(data);
+    }
+  });
 };

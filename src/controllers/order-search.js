@@ -1,16 +1,17 @@
-var mongoose = require('mongoose');
-var ordersModel = require('../models/orders.js');
+import ordersModel from '../models/orders';
 
-module.exports = function (req, res, next) {
-	ordersModel.find({
-		$or: [
-			{companyName: req.params.name},
-			{customerAddress: req.params.name},
-			{orderedItem: req.params.name}]
-	}, function (err, data) {
-		if (err)
-			res.json(false);
-		else
-			res.json(data);
-	});
+export default (req, res) => {
+  ordersModel.find({
+    $or: [
+      { companyName: req.params.name },
+      { customerAddress: req.params.name },
+      { orderedItem: req.params.name },
+    ],
+  }, (err, data) => {
+    if (err) {
+      res.json(false);
+    } else {
+      res.json(data);
+    }
+  });
 };

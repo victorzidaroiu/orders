@@ -1,28 +1,28 @@
-var mongoose = require('mongoose');
-var ordersModel = require('../models/orders.js');
+import ordersModel from '../models/orders';
 
-module.exports = function (req, res, next) {
-	var agg = [
-		{$group: {
-			_id: "$orderedItem",
-			timesOrdered: {$sum: 1}
-		}},
-		{$sort:{
-			timesOrdered: -1
-		}}
-	];
+export default (req, res) => {
+  const agg = [
+    { $group: {
+      _id: '$orderedItem',
+      timesOrdered: { $sum: 1 },
+    } },
+    { $sort: {
+      timesOrdered: -1,
+    } },
+  ];
 
-	ordersModel.aggregate(agg, function(err, orders){
-		if (err)
-			throw err;
-		else {
-			orders.map(function(order){
-				order.orderedItem = order._id;
-				delete order._id;
-
-				return order;
-			});
-			res.json(orders);
-		}
-	});
-}
+  ordersModel.aggregate(agg, (err, orders) => {
+    if (err) {
+      throw err;
+    } else {
+      res.json(orders.map((order) => {
+        const orderCopy = order;
+        /* eslint-disable */
+        orderCopy.orderedItem = order._id;
+        delete orderCopy._id;
+        /* eslint-enable */
+        return orderCopy;
+      }));
+    }
+  });
+};

@@ -1,3 +1,4 @@
+/* eslint-disable */
 angular.module('ordersApp', ['ngRoute'])
 	.config(['$routeProvider',
 		function ($routeProvider) {
@@ -113,3 +114,4 @@ if (!String.prototype.trim) {
 		return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
 	};
 }
+/* eslint-enable */

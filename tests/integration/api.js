@@ -1,14 +1,29 @@
-var rest = require('restler');
-var debug = require('debug')('api-test');
-require('dotenv').config({ silent: true })
+/* global describe, it */
 
-var server = 'http://localhost:' + process.env.PORT;
+
+import restler from 'restler';
+import dotenv from 'dotenv';
+import _debug from 'debug';
+const debug = _debug('api-test');
+dotenv.config({ silent: true })
+
+const serverUrl = `http://localhost:${process.env.PORT}`;
 
 var lastInsertedId = null;
 describe('Orders API', function() {
 	this.timeout(5000);
-	it('should get the list of orders', function(done) {
-		rest.get(server + '/api/orders').on('success', function(data, response) {
+	it('should get the list of orders', () => {
+		restler.get(`${serverUrl}/api/orders`).on('success', (data, response) => {
+			debug('Returned Data: ');
+			debug(data);
+			if (data instanceof Array) {
+				done();
+      }
+		});
+	});
+
+	it('should get the list of top orders', () => {
+		restler.get(server + '/api/top-orders').on('success', (data, response) => {
 			debug('Returned Data: ');
 			debug(data);
 			if (data instanceof Array)
@@ -16,23 +31,14 @@ describe('Orders API', function() {
 		});
 	});
 
-	it('should get the list of top orders', function(done) {
-		rest.get(server + '/api/top-orders').on('success', function(data, response) {
-			debug('Returned Data: ');
-			debug(data);
-			if (data instanceof Array)
-				done();
-		});
-	});
-
-	it('should insert an order and return the id', function(done) {
-		rest.post(server + '/api',{
+	it('should insert an order and return the id', () => {
+		restler.post(server + '/api',{
 			data: {
 				companyName: 'companyName',
 				customerAddress: 'test customerAddress',
 				orderedItem: 'test orderedItem'
 			}
-		}).on('success', function(data, response) {
+		}).on('success', (data, response) => {
 			debug('Returned Data: ');
 			debug(data);
 			if (data && data._id) {
@@ -42,24 +48,27 @@ describe('Orders API', function() {
 		});
 	});
 
-	it('should find orders', function(done) {
-		rest.get(server + '/api/search/search-term').on('success', function(data, response) {
+	it('should find orders', () => {
+		restler.get(server + '/api/search/search-term').on('success', (data, response) => {
 			debug('Returned Data: ');
 			debug(data);
-			if (data instanceof Array)
-				done();
+			if (data instanceof Array) {
+        done();
+      }
 		});
 	});
 
-	it('should delete an order', function(done) {
-		if (!lastInsertedId)
-			return;
+	it('should delete an order', () => {
+		if (!lastInsertedId) {
+      return;
+    }
 
-		rest.del(server + '/api/' + lastInsertedId).on('success', function(data, response) {
+		restler.del(`${server}/api/lastInsertedId`).on('success', (data, response) => {
 			debug('Returned Data: ');
 			debug(data);
-			if (data && data._id)
-				done();
+			if (data && data._id) {
+        done();
+      }
 		});
 	});
 });
