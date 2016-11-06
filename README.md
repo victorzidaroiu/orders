@@ -13,16 +13,16 @@ http://orders.zidaroiu.com
 
 ### Installation
 
-``` nvm use ```
-``` npm i ```
-
-### Start server
-
-``` npm start ```
+* ``` nvm use ```
+* ``` npm i ```
 
 ### Build
 
 ``` npm run build ```
+
+### Start
+
+``` npm run dev ```
 
 ### Test
 
