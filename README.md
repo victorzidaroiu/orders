@@ -1,29 +1,27 @@
-## Orders App
+# Orders App
 
 This is an app built using the MEAN stack. It implements a RESTful API to communicate to an AngularJS front end. It allows you to view, add, delete and search orders.
 
 http://orders.zidaroiu.com
 
-### Requirements
+## Requirements
 
 - node
 - MongoDB
-- Mocha
-- Grunt
 
-### Installation
+## Installation
 
 * ``` nvm use ```
 * ``` npm i ```
 
-### Build
+## Build
 
 ``` npm run build ```
 
-### Start
-
-``` npm run dev ```
-
-### Test
+## Testing
 
 ``` npm test ```
+
+## Run
+
+``` npm run dev ```
